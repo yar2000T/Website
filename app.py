@@ -14,18 +14,12 @@ def keyactivate(key):
             if i.strip('\n') != hashlib.sha256(key.encode()).hexdigest():
                 open('keys.txt','a').write(i)
         return 'Accepted'
-
+    return abort(404)
 @app.route('/')
 def index():
     list_ips = open('ip_activated.txt','r').readlines()
     if request.access_route[0] in list_ips:
         return "You are in list"
-
-@app.errorhandler(404)
-@app.errorhandler(405)
-def page_not_found(e):
-    print('sha')
-    print(hashlib.sha256(b'sha').hexdigest())
     return abort(404)
 
 if __name__ == "__main__":
